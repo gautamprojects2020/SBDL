@@ -10,12 +10,13 @@ def get_config(env):
     return conf
 
 def get_spark_conf(env):
+    spark_conf=SparkConf()
     config=configparser.ConfigParser()
     config.read("conf/spark.conf")
-    conf={}
+
     for (key,value) in config.items(env):
-        conf[key]=value
-    return conf
+        spark_conf.set(key,value)
+    return spark_conf
 
 def get_data_filter(env,data_filter):
     conf=get_config(env)
